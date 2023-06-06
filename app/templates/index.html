@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CE232.N21.1-Nhom 9</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet'>
+        <style>
+            html 
+            { 
+                font-family: 'Open Sans', sans-serif;
+                display: block;
+                margin: 0px auto; 
+                text-align: center;
+                color: #444444;
+            }
+            body
+            {
+                margin: 0px;
+            } 
+            h1 
+            {
+                margin: 50px auto 30px;
+            } 
+            .side-by-side
+            {
+                display: table-cell;
+                vertical-align: middle;
+                position: relative;
+            }
+            .text
+            {
+                font-weight: 600;
+                font-size: 19px;
+                width: 200px;
+            }
+            .reading
+            {
+                font-weight: 300;
+                font-size: 50px;
+                padding-right: 25px;
+            }
+            .temperature .reading
+            {
+                color: #F29C1F;
+            }
+                .humidity .reading
+            {
+                color: #3B97D3;
+            }
+            .superscript
+            {
+                font-size: 17px;
+                font-weight: 600;
+                position: absolute;
+                top: 10px;
+            }
+            .data
+            {
+                padding: 10px;
+            }
+            .container
+            {
+                display: table;
+                margin: 0 auto;
+            }
+            .icon
+            {
+                width: 65px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Mini Project</h1>
+        <div class='container'>
+            <div class='data temperature'>
+                <div class='side-by-side icon'>
+                    <svg enable-background='new 0 0 19.438 54.003'height=54.003px id=Layer_1 version=1.1 viewBox='0 0 19.438 54.003'width=19.438px x=0px xml:space=preserve xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink y=0px><g><path d='M11.976,8.82v-2h4.084V6.063C16.06,2.715,13.345,0,9.996,0H9.313C5.965,0,3.252,2.715,3.252,6.063v30.982
+                    C1.261,38.825,0,41.403,0,44.286c0,5.367,4.351,9.718,9.719,9.718c5.368,0,9.719-4.351,9.719-9.718
+                    c0-2.943-1.312-5.574-3.378-7.355V18.436h-3.914v-2h3.914v-2.808h-4.084v-2h4.084V8.82H11.976z M15.302,44.833
+                    c0,3.083-2.5,5.583-5.583,5.583s-5.583-2.5-5.583-5.583c0-2.279,1.368-4.236,3.326-5.104V24.257C7.462,23.01,8.472,22,9.719,22
+                    s2.257,1.01,2.257,2.257V39.73C13.934,40.597,15.302,42.554,15.302,44.833z'fill=#F29C21 /></g></svg>
+                </div>
+                <div class='side-by-side text'>Temperature</div>
+                <div class='side-by-side reading'>
+                    <span id="temperature">0</span>
+                    <span class='superscript'>&deg;C</span>
+                </div>
+            </div>
+            <div class='data humidity'>
+                <div class='side-by-side icon'>
+                    <svg enable-background='new 0 0 29.235 40.64'height=40.64px id=Layer_1 version=1.1 viewBox='0 0 29.235 40.64'width=29.235px x=0px xml:space=preserve xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink y=0px><path d='M14.618,0C14.618,0,0,17.95,0,26.022C0,34.096,6.544,40.64,14.618,40.64s14.617-6.544,14.617-14.617
+                    C29.235,17.95,14.618,0,14.618,0z M13.667,37.135c-5.604,0-10.162-4.56-10.162-10.162c0-0.787,0.638-1.426,1.426-1.426
+                    c0.787,0,1.425,0.639,1.425,1.426c0,4.031,3.28,7.312,7.311,7.312c0.787,0,1.425,0.638,1.425,1.425
+                    C15.093,36.497,14.455,37.135,13.667,37.135z'fill=#3C97D3 /></svg>
+                </div>
+                <div class='side-by-side text'>Humidity</div>
+                <div class='side-by-side reading'>
+                    <span id="humidity">0</span>
+                    <span class='superscript'>%</span>
+                </div>
+            </div>
+        <script>
+            setInterval(function() 
+            {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() 
+                {
+                    if (this.readyState == 4 && this.status == 200) 
+                    {
+                        document.getElementById("temperature").innerHTML =
+                        this.responseText.slice(0, 3);
+                        document.getElementById("humidity").innerHTML =
+                        this.responseText.slice(3, 6);
+                    }
+                };
+                xhttp.open("GET", "/update", true);
+                xhttp.send();
+            }, 1000); 
+            
+        </script>
+    </body>
+</html>
