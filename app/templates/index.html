@@ -82,7 +82,7 @@
                 </div>
                 <div class='side-by-side text'>Temperature</div>
                 <div class='side-by-side reading'>
-                    <span id="temperature">0</span>
+                    <span id="temperature">{{temp}}</span>
                     <span class='superscript'>&deg;C</span>
                 </div>
             </div>
@@ -95,7 +95,7 @@
                 </div>
                 <div class='side-by-side text'>Humidity</div>
                 <div class='side-by-side reading'>
-                    <span id="humidity">0</span>
+                    <span id="humidity">{{humi}}</span>
                     <span class='superscript'>%</span>
                 </div>
             </div>
@@ -108,12 +108,12 @@
                     if (this.readyState == 4 && this.status == 200) 
                     {
                         document.getElementById("temperature").innerHTML =
-                        this.responseText.slice(0, 3);
+                        this.responseText;
                         document.getElementById("humidity").innerHTML =
-                        this.responseText.slice(3, 6);
+                        this.responseText;
                     }
                 };
-                xhttp.open("GET", "/update", true);
+                xhttp.open("GET", "/", true);
                 xhttp.send();
             }, 1000); 
             

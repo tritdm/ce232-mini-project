@@ -2,9 +2,9 @@
 ## Model of project
 ![alt](/readme_folder/model.png)
 ## ESP32 nodes task
-* Lấy các dữ liệu nhiệt độ, độ ẩm, lượng mưa từ các cảm biến (1.5đ)
-* Hiển thị dữ liệu lên LCD SSD1306 (1đ)
-* Gửi về server với chu kỳ 10s/lần (1.5đ)
+* Collect temperature and humidity data from sensor
+* Show data on OLED SSD1306
+* Send data to MQTT Broker every 10 seconds
 ## Server task
 * Nhận dữ liệu (0.5đ)
 * Lưu dữ liệu vào database
