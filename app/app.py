@@ -2,7 +2,8 @@ import os
 from flask import Flask, render_template
 from flask_mqtt import Mqtt
 from flask_sqlalchemy import SQLAlchemy
-
+import sqlite3
+import time
 from sqlalchemy.sql import func
 
 app = Flask(__name__)
@@ -25,22 +26,26 @@ db = SQLAlchemy(app)
 class temphumi(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     time = db.Column(db.)
-    temperature = db.Column(db.Float, nullable=False)
-    humidity = db.Column(db.Float, nullable=False)
+    topic = db.Column(db.Float, nullable=False)
+    data = db.Column(db.Float, nullable=False)
 
     def __repr__(self):
         return f'<temphumi {self.firstname}>'
 """
-temp = 0
-humi = 2
-@app.route('/', methods=["POST","GET"])
-def index():
-    if request.method =='POST':
-        temp = temp + 1
-        humi = humi + 3
-	    return render_template('home.html', temperature=temp, humidity=humi)
 
-"""
+def get_db_connection():
+    conn = sqlite3.connect('sensors_data.db')
+    conn.row_factory = sqlite3.Row
+    return conn
+
+@app.route('/')
+def index():
+    conn = get_db_connection()
+    data1 = conn.execute('SELECT created, topic, data FROM sensors_data \
+                WHERE id = (SELECT MAX(id) FROM sensors_data)').fetchone()
+    conn.close()
+    return render_template('home.html', data1=data1)
+
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):
 	mqtt.subscribe('Temp')
@@ -52,11 +57,16 @@ def handle_mqtt_message(client, userdata, message):
         topic=message.topic,
         payload=message.payload.decode()
     )
-    if data['topic'] == 'Temp': 
-    	print("Temp = ", data['payload'])
-    elif data['topic'] == 'Humi': 
-    	print("Humi = ", data['payload'])
-"""
+    #t = datetime.datetime.now(tz=pytz.utc)
+    #date_time_str = t.isoformat()
+    conn = sqlite3.connect('sensors_data.db')
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO sensors_data (topic, data) VALUES (?, ?)",
+            (data['topic'], data['payload'])
+            )
+    conn.commit()
+    cursor.close()
+    conn.close()
 
 if __name__ == '__main__':
 	app.run(debug=True)
