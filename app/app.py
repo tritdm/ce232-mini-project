@@ -41,10 +41,12 @@ def get_db_connection():
 @app.route('/')
 def index():
     conn = get_db_connection()
-    data1 = conn.execute('SELECT created, topic, data FROM sensors_data \
-                WHERE id = (SELECT MAX(id) FROM sensors_data)').fetchone()
+    temp_data = conn.execute('SELECT created, data FROM temp_data \
+                WHERE id = (SELECT MAX(id) FROM temp_data)').fetchone()
+    humi_data = conn.execute('SELECT created, data FROM humi_data \
+                WHERE id = (SELECT MAX(id) FROM humi_data)').fetchone()
     conn.close()
-    return render_template('home.html', data1=data1)
+    return render_template('home.html', temp_data=temp_data, humi_data=humi_data)
 
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):
@@ -57,13 +59,16 @@ def handle_mqtt_message(client, userdata, message):
         topic=message.topic,
         payload=message.payload.decode()
     )
-    #t = datetime.datetime.now(tz=pytz.utc)
-    #date_time_str = t.isoformat()
     conn = sqlite3.connect('sensors_data.db')
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO sensors_data (topic, data) VALUES (?, ?)",
-            (data['topic'], data['payload'])
-            )
+    if data['topic'] == 'Temp':
+        cursor.execute("INSERT INTO temp_data (data) VALUES (?)",
+                (data['payload'],)
+                )
+    elif data['topic'] == 'Humi':
+        cursor.execute("INSERT INTO humi_data (data) VALUES (?)",
+                (data['payload'],)
+                )
     conn.commit()
     cursor.close()
     conn.close()

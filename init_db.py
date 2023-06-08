@@ -8,12 +8,12 @@ with open('sensors_data.sql') as f:
 
 cur = connection.cursor()
 
-cur.execute("INSERT INTO sensors_data (topic, data) VALUES (?, ?)",
-            ('Humi', '50.00')
+cur.execute("INSERT INTO humi_data (data) VALUES (?)",
+            ('50.00',)
             )
 
-cur.execute("INSERT INTO sensors_data (topic, data) VALUES (?, ?)",
-            ('Temp', '37.00')
+cur.execute("INSERT INTO temp_data (data) VALUES (?)",
+            ('37.00',)
             )
 
 connection.commit()

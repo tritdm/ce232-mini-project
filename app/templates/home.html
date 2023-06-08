@@ -3,7 +3,27 @@
 <body>
     <title>Mini project</title>
     <h1>Data</h1>
-    <h2>{{ data1['topic'] }}: {{ data1['data'] }}</h2>
-    <h2>Time: {{ data1['created'] }}</h2>
+    <h2>Temperature: {{ temp_data['data'] }}</h2>
+    <h2>Time update: {{ temp_data['created'] }}</h2>
+    <h2>Humidity: {{ humi_data['data'] }}</h2>
+    <h2>Time update: {{ humi_data['created'] }}</h2>
+    <!--<script>
+        setInterval(function() 
+        {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() 
+            {
+                if (this.readyState == 4 && this.status == 200) 
+                {
+                    document.getElementById("temperature").innerHTML =
+                    this.responseText;
+                    document.getElementById("humidity").innerHTML =
+                    this.responseText;
+                }
+            };
+            xhttp.open("GET", "/", true);
+            xhttp.send();
+        }, 1000); 
+    </script>-->
 </body>
 </html>
