@@ -82,7 +82,7 @@
                 </div>
                 <div class='side-by-side text'>Temperature</div>
                 <div class='side-by-side reading'>
-                    <span id="temperature">{{temp}}</span>
+                    <span id="temperature">{{temp_data['data']}}</span>
                     <span class='superscript'>&deg;C</span>
                 </div>
             </div>
@@ -95,10 +95,11 @@
                 </div>
                 <div class='side-by-side text'>Humidity</div>
                 <div class='side-by-side reading'>
-                    <span id="humidity">{{humi}}</span>
+                    <span id="humidity">{{humi_data['data']}}</span>
                     <span class='superscript'>%</span>
                 </div>
             </div>
+        </div>
         <script>
             setInterval(function() 
             {

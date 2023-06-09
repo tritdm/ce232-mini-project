@@ -1,10 +1,8 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify, make_response
 from flask_mqtt import Mqtt
-from flask_sqlalchemy import SQLAlchemy
 import sqlite3
-import time
-from sqlalchemy.sql import func
+import json
 
 app = Flask(__name__)
 app.config['MQTT_BROKER_URL'] = 'mqtt.flespi.io'
@@ -42,11 +40,15 @@ def get_db_connection():
 def index():
     conn = get_db_connection()
     temp_data = conn.execute('SELECT created, data FROM temp_data \
-                WHERE id = (SELECT MAX(id) FROM temp_data)').fetchone()
+                WHERE id > (SELECT MAX(id) FROM temp_data) - 5 LIMIT 5').fetchall()
     humi_data = conn.execute('SELECT created, data FROM humi_data \
-                WHERE id = (SELECT MAX(id) FROM humi_data)').fetchone()
+                WHERE id > (SELECT MAX(id) FROM humi_data) - 5 LIMIT 5').fetchall()
     conn.close()
-    return render_template('home.html', temp_data=temp_data, humi_data=humi_data)
+    temp_times  = [row[0] for row in temp_data]
+    temp_values = [row[1] for row in temp_data]
+    humi_times  = [row[0] for row in humi_data]
+    humi_values = [row[1] for row in humi_data]
+    return render_template('home.html', temp_times=temp_times, temp_values=temp_values, humi_times=humi_times, humi_values=humi_values)
 
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):
@@ -55,23 +57,19 @@ def handle_connect(client, userdata, flags, rc):
 
 @mqtt.on_message()
 def handle_mqtt_message(client, userdata, message):
-    data = dict(	
-        topic=message.topic,
-        payload=message.payload.decode()
-    )
     conn = sqlite3.connect('sensors_data.db')
     cursor = conn.cursor()
-    if data['topic'] == 'Temp':
+    if message.topic == 'Temp':
         cursor.execute("INSERT INTO temp_data (data) VALUES (?)",
-                (data['payload'],)
+                (message.payload.decode(),)
                 )
-    elif data['topic'] == 'Humi':
+    elif message.topic == 'Humi':
         cursor.execute("INSERT INTO humi_data (data) VALUES (?)",
-                (data['payload'],)
+                (message.payload.decode(),)
                 )
     conn.commit()
     cursor.close()
     conn.close()
 
 if __name__ == '__main__':
-	app.run(debug=True)
+	app.run(debug=False, port=5000, host='0.0.0.0')

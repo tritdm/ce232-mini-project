@@ -1,23 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+</head>
 <body>
     <title>Mini project</title>
-    <h1>Data</h1>
-    <h2>Temperature: {{ temp_data['data'] }}</h2>
-    <h2>Time update: {{ temp_data['created'] }}</h2>
-    <h2>Humidity: {{ humi_data['data'] }}</h2>
-    <h2>Time update: {{ humi_data['created'] }}</h2>
+    <canvas id="lineChartTemp" width="900" height="400"></canvas>
+    <canvas id="lineChartHumi" width="900" height="400"></canvas>
+
+    <script>
+        var ctx = document.getElementById("lineChartTemp").getContext("2d");
+        var lineChart = new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: {{ temp_times | safe }},
+                datasets: [
+                    {
+                        label: "Temperature",
+                        data: {{ temp_values | safe }},
+                        fill: true,
+                        borderCorlor: "rgb(92, 192, 192)",
+                        lineTension: 0.5
+                    }
+                ]
+            },
+            options: {
+                responsive: false
+            }
+        })
+    </script>-
+
+    <script>
+        var ctx = document.getElementById("lineChartHumi").getContext("2d");
+        var lineChart = new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: {{ humi_times | safe }},
+                datasets: [
+                    {
+                        label: "Humidity",
+                        data: {{ humi_values | safe }},
+                        fill: true,
+                        borderCorlor: "rgb(75, 192, 192)",
+                        lineTension: 0.5
+                    }
+                ]
+            },
+            options: {
+                responsive: false
+            }
+        })
+    </script>
     <!--<script>
         setInterval(function() 
         {
             var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() 
+            xhttp.onload = function() 
             {
                 if (this.readyState == 4 && this.status == 200) 
                 {
-                    document.getElementById("temperature").innerHTML =
-                    this.responseText;
-                    document.getElementById("humidity").innerHTML =
+                    document.getElementById("temp", "humi").innerHTML =
                     this.responseText;
                 }
             };
