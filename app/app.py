@@ -10,27 +10,8 @@ app.config['MQTT_BROKER_URL'] = 'mqtt.flespi.io'
 app.config['MQTT_BROKER_PORT'] = 1883
 app.config['MQTT_USERNAME'] = 'M3ExGxt4y2DmCkvN8CAqK0tYyUD4GLEgD9D7uV0TNt3dCoRAOfPo58brRCkncOrF'
 app.config['MQTT_PASSWORD'] = ''
-app.config['MQTT_REFRESH_TIME'] = 1.0 # refresh time in seconds
+app.config['MQTT_REFRESH_TIME'] = 1.0 
 mqtt = Mqtt(app)
-
-"""
-basedir = os.path.abspath(os.path.dirname(__file__))
-
-app.config['SQLALCHEMY_DATABASE_URI'] = \
-		'sqlite:///' + os.path.join(basedir, 'database.db')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db = SQLAlchemy(app)
-
-class temphumi(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    time = db.Column(db.)
-    topic = db.Column(db.Float, nullable=False)
-    data = db.Column(db.Float, nullable=False)
-
-    def __repr__(self):
-        return f'<temphumi {self.firstname}>'
-"""
 
 def get_db_connection():
     conn = sqlite3.connect('sensors_data.db')
@@ -56,7 +37,7 @@ def chart_data():
             yield f"data:{json_data}\n\n"
             time.sleep(10)
 
-    response = Response(stream_with_context(get_database_data	()), mimetype="text/event-stream")
+    response = Response(stream_with_context(get_database_data()), mimetype="text/event-stream")
     response.headers["Cache-Control"] = "no-cache"
     response.headers["X-Accel-Buffering"] = "no"
     return response
@@ -70,6 +51,12 @@ def handle_connect(client, userdata, flags, rc):
 def handle_mqtt_message(client, userdata, message):
     conn = sqlite3.connect('sensors_data.db')
     cursor = conn.cursor()
+    """
+    cursor.execute("DELETE FROM temp_data \
+            WHERE id <= (SELECT MAX(id) FROM temp_data) - 100")
+    cursor.execute("DELETE FROM humi_data \
+            WHERE id <= (SELECT MAX(id) FROM humi_data) - 100")
+    """
     if message.topic == 'Temp':
         cursor.execute("INSERT INTO temp_data (data) VALUES (?)",
                 (message.payload.decode(),)
@@ -78,8 +65,8 @@ def handle_mqtt_message(client, userdata, message):
         cursor.execute("INSERT INTO humi_data (data) VALUES (?)",
                 (message.payload.decode(),)
                 )
-    conn.commit()
     cursor.close()
+    conn.commit()
     conn.close()
 
 if __name__ == '__main__':
