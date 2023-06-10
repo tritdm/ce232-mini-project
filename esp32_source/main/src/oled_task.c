@@ -1,4 +1,6 @@
 #include "oled_task.h"
+#include "ssd1306.h"
+#include "font8x8_basic.h"
 
 void ssd1306_init(void)
 {
@@ -24,9 +26,9 @@ void ssd1306_init(void)
 	i2c_cmd_link_delete(cmd);
 }
 
-void task_ssd1306_display_text(const char *text) 
+void task_ssd1306_display_text(void *arg_text) 
 {
-	//char *text = (char*)arg_text;
+	char *text = (char*)arg_text;
 	uint8_t text_len = strlen(text);
 
 	i2c_cmd_handle_t cmd;

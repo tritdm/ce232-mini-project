@@ -54,17 +54,17 @@ void ftoa(float n, char* res, int afterpoint)
     }
 }
 
-char* oled_string(const char *humidity, const char *temperature)
+char* oled_string(const char *temperature, const char *humidity)
 {
-	char humi[12] = "Humi: ";
 	char temp[12] = "Temp: ";
+	char humi[12] = "Humi: ";
 	char* res = malloc(25);
 
-	strcat(humi, humidity);
 	strcat(temp, temperature);
-	strcpy(res, humi);
+	strcat(humi, humidity);
+	strcpy(res, temp);
 	strcat(res, "\n");
-	strcat(res, temp);
+	strcat(res, humi);
 	
 	return res;
 }

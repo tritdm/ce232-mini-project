@@ -30,31 +30,31 @@
 #include "esp_log.h"
 #include "mqtt_client.h"
 
-#include <string.h>
 #include "driver/i2c.h"
 #include "sdkconfig.h"
 #include "hdc1080.h"
 #include "i2c_init.h"
 #include "oled_string_process.h"
-#include "ssd1306.h"
-#include "font8x8_basic.h"
+//#include "ssd1306.h"
+//#include "font8x8_basic.h"
+#include "oled_task.h"
 
 #define MQTT_BROKER_URI             "mqtt://mqtt.flespi.io"
 #define MQTT_BROKER_PORT            1883
 #define MQTT_BROKER_USERNAME        "M3ExGxt4y2DmCkvN8CAqK0tYyUD4GLEgD9D7uV0TNt3dCoRAOfPo58brRCkncOrF"
 #define MQTT_BROKER_PASSWORD        ""
 #define MQTT_BROKER_CLIENTID        "lop1nhom9"
-#define TOPIC_1                     "Humi"
-#define TOPIC_2                     "Temp"
+#define TOPIC_1                     "Temp"
+#define TOPIC_2                     "Humi"
 
 static esp_mqtt_client_handle_t client;
 hdc1080_registers_t *sensor;
 
 const char *TAG = "MINI_PROJECT";
 
-void ssd1306_init(void);
+/*void ssd1306_init(void);
 void task_ssd1306_display_text(const char *text);
-void task_ssd1306_display_clear(void *ignore);
+void task_ssd1306_display_clear(void *ignore);*/
 
 static void log_error_if_nonzero(const char *message, int error_code)
 {
@@ -169,28 +169,28 @@ void app_main(void)
 
 		hdc1080_read(sensor, &temp, &humi);
 
-		ftoa(humi, humi_char, 2);
-		msg_id = esp_mqtt_client_publish(client, TOPIC_1, humi_char, 0, 0, 0);
-        ESP_LOGI(TAG, "sent humi successful, msg_id=%d", msg_id);
+		ftoa(temp, temp_char, 2);
+		msg_id = esp_mqtt_client_publish(client, TOPIC_1, temp_char, 0, 0, 0);
+        ESP_LOGI(TAG, "sent temp successful, msg_id=%d", msg_id);
 
 		vTaskDelay(100 / portTICK_PERIOD_MS);
 
-		ftoa(temp, temp_char, 2);
-		msg_id = esp_mqtt_client_publish(client, TOPIC_2, temp_char, 0, 0, 0);
-        ESP_LOGI(TAG, "sent temp successful, msg_id=%d", msg_id);
+		ftoa(humi, humi_char, 2);
+		msg_id = esp_mqtt_client_publish(client, TOPIC_2, humi_char, 0, 0, 0);
+        ESP_LOGI(TAG, "sent humi successful, msg_id=%d", msg_id);
 
-		char* oled_print = oled_string(humi_char, temp_char);
+		char* oled_print = oled_string(temp_char, humi_char);
 
 		xTaskCreate(task_ssd1306_display_clear, "display_clear", 1024 * 1, (void *)0, 10, NULL);
 		vTaskDelay(100 / portTICK_PERIOD_MS);
 
-		xTaskCreate(task_ssd1306_display_text, "display_text", 1024 * 1, oled_print, 10, NULL);
+		xTaskCreate(task_ssd1306_display_text, "display_text", 1024 * 1, (void *)oled_print, 10, NULL);
 		vTaskDelay(10000 / portTICK_PERIOD_MS);
 
 		free(oled_print);
 	}
 }
-
+/*
 void ssd1306_init(void)
 {
 	i2c_cmd_handle_t cmd;
@@ -296,3 +296,4 @@ void task_ssd1306_display_clear(void *ignore)
 
 	vTaskDelete(NULL);
 }
+*/

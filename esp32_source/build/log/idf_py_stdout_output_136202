@@ -1,0 +1,51 @@
+[1/10] Performing build step for 'bootloader'
+[1/1] cd /home/mike/Documents/tkhtn_kd/mini_project/esp32_source/build/bootloader/esp-idf/esptool_py && /home/mike/.espressif/python_env/idf5.1_py3.8_env/bin/python /home/mike/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 /home/mike/Documents/tkhtn_kd/mini_project/esp32_source/build/bootloader/bootloader.bin
+Bootloader binary size 0x6740 bytes. 0x8c0 bytes (8%) free.
+[2/10] No install step for 'bootloader'
+[3/10] Completed 'bootloader'
+[4/10] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/src/oled_task.c.obj
+[5/10] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/src/main.c.obj
+/home/mike/Documents/tkhtn_kd/mini_project/esp32_source/main/src/main.c: In function 'mqtt_event_handler':
+/home/mike/Documents/tkhtn_kd/mini_project/esp32_source/main/src/main.c:71:9: warning: variable 'msg_id' set but not used [-Wunused-but-set-variable]
+   71 |     int msg_id;
+      |         ^~~~~~
+/home/mike/Documents/tkhtn_kd/mini_project/esp32_source/main/src/main.c: In function 'app_main':
+/home/mike/Documents/tkhtn_kd/mini_project/esp32_source/main/src/main.c:144:12: warning: assignment to 'hdc1080_registers_t *' from incompatible pointer type 'hdc1080_sensor_t *' [-Wincompatible-pointer-types]
+  144 |     sensor = hdc1080_init_sensor (I2C_MASTER_NUM, HDC1080_ADDR);
+      |            ^
+/home/mike/Documents/tkhtn_kd/mini_project/esp32_source/main/src/main.c:148:63: warning: passing argument 1 of 'hdc1080_get_registers' from incompatible pointer type [-Wincompatible-pointer-types]
+  148 |         hdc1080_registers_t registers = hdc1080_get_registers(sensor);
+      |                                                               ^~~~~~
+      |                                                               |
+      |                                                               hdc1080_registers_t *
+In file included from /home/mike/Documents/tkhtn_kd/mini_project/esp32_source/main/src/main.c:35:
+/home/mike/Documents/tkhtn_kd/mini_project/esp32_source/main/inc/hdc1080.h:87:61: note: expected 'hdc1080_sensor_t *' but argument is of type 'hdc1080_registers_t *'
+   87 | hdc1080_registers_t hdc1080_get_registers(hdc1080_sensor_t* sensor);
+      |                                           ~~~~~~~~~~~~~~~~~~^~~~~~
+/home/mike/Documents/tkhtn_kd/mini_project/esp32_source/main/src/main.c:152:31: warning: passing argument 1 of 'hdc1080_set_registers' from incompatible pointer type [-Wincompatible-pointer-types]
+  152 |         hdc1080_set_registers(sensor, registers);
+      |                               ^~~~~~
+      |                               |
+      |                               hdc1080_registers_t *
+/home/mike/Documents/tkhtn_kd/mini_project/esp32_source/main/inc/hdc1080.h:88:46: note: expected 'hdc1080_sensor_t *' but argument is of type 'hdc1080_registers_t *'
+   88 | void hdc1080_set_registers(hdc1080_sensor_t* sensor, hdc1080_registers_t registers);
+      |                            ~~~~~~~~~~~~~~~~~~^~~~~~
+/home/mike/Documents/tkhtn_kd/mini_project/esp32_source/main/src/main.c:170:30: warning: passing argument 1 of 'hdc1080_read' from incompatible pointer type [-Wincompatible-pointer-types]
+  170 |                 hdc1080_read(sensor, &temp, &humi);
+      |                              ^~~~~~
+      |                              |
+      |                              hdc1080_registers_t *
+/home/mike/Documents/tkhtn_kd/mini_project/esp32_source/main/inc/hdc1080.h:98:37: note: expected 'hdc1080_sensor_t *' but argument is of type 'hdc1080_registers_t *'
+   98 | bool hdc1080_read(hdc1080_sensor_t* sensor, float* temperature, float* humidity);
+      |                   ~~~~~~~~~~~~~~~~~~^~~~~~
+[6/10] Linking C static library esp-idf/main/libmain.a
+[7/10] Generating ld/sections.ld
+[8/10] Linking CXX executable esp32_source.elf
+[9/10] Generating binary image from built executable
+esptool.py v4.5.1
+Creating esp32 image...
+Merged 25 ELF sections
+Successfully created esp32 image.
+Generated /home/mike/Documents/tkhtn_kd/mini_project/esp32_source/build/esp32_source.bin
+[10/10] cd /home/mike/Documents/tkhtn_kd/mini_project/esp32_source/build/esp-idf/esptool_py && /home/mike/.espressif/python_env/idf5.1_py3.8_env/bin/python /home/mike/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /home/mike/Documents/tkhtn_kd/mini_project/esp32_source/build/partition_table/partition-table.bin /home/mike/Documents/tkhtn_kd/mini_project/esp32_source/build/esp32_source.bin
+esp32_source.bin binary size 0xdf150 bytes. Smallest app partition is 0x100000 bytes. 0x20eb0 bytes (13%) free.
