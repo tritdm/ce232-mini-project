@@ -1,8 +1,9 @@
 import os
-from flask import Flask, render_template, jsonify, make_response
+from flask import Flask, render_template, jsonify, make_response, Response, stream_with_context
 from flask_mqtt import Mqtt
 import sqlite3
 import json
+import time
 
 app = Flask(__name__)
 app.config['MQTT_BROKER_URL'] = 'mqtt.flespi.io'
@@ -38,17 +39,27 @@ def get_db_connection():
 
 @app.route('/')
 def index():
-    conn = get_db_connection()
-    temp_data = conn.execute('SELECT created, data FROM temp_data \
-                WHERE id > (SELECT MAX(id) FROM temp_data) - 5 LIMIT 5').fetchall()
-    humi_data = conn.execute('SELECT created, data FROM humi_data \
-                WHERE id > (SELECT MAX(id) FROM humi_data) - 5 LIMIT 5').fetchall()
-    conn.close()
-    temp_times  = [row[0] for row in temp_data]
-    temp_values = [row[1] for row in temp_data]
-    humi_times  = [row[0] for row in humi_data]
-    humi_values = [row[1] for row in humi_data]
-    return render_template('home.html', temp_times=temp_times, temp_values=temp_values, humi_times=humi_times, humi_values=humi_values)
+    return render_template('home.html')
+    
+@app.route('/chart-data')
+def chart_data():
+    def get_database_data():
+        while True:
+            conn = get_db_connection()
+            temp_data = conn.execute('SELECT created, data FROM temp_data \
+                WHERE id = (SELECT MAX(id) FROM temp_data)').fetchone()
+            humi_data = conn.execute('SELECT created, data FROM humi_data \
+                WHERE id = (SELECT MAX(id) FROM humi_data)').fetchone()
+            json_data = json.dumps(
+                {'temp_time': temp_data['created'], 'temp_value': float(temp_data['data']), \
+                'humi_time': humi_data['created'], 'humi_value': float(humi_data['data'])})
+            yield f"data:{json_data}\n\n"
+            time.sleep(10)
+
+    response = Response(stream_with_context(get_database_data	()), mimetype="text/event-stream")
+    response.headers["Cache-Control"] = "no-cache"
+    response.headers["X-Accel-Buffering"] = "no"
+    return response
 
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):

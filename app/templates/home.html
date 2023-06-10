@@ -1,73 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <meta charset="UTF-8">
+    <title>CE232.N21.1-Nhom 9</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" rel="stylesheet">
 </head>
 <body>
-    <title>Mini project</title>
-    <canvas id="lineChartTemp" width="900" height="400"></canvas>
-    <canvas id="lineChartHumi" width="900" height="400"></canvas>
-
-    <script>
-        var ctx = document.getElementById("lineChartTemp").getContext("2d");
-        var lineChart = new Chart(ctx, {
-            type: "line",
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="tempChart"></canvas>
+                    <canvas id="humiChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--suppress JSUnresolvedLibraryURL -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<!--suppress JSUnresolvedLibraryURL -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!--suppress JSUnresolvedLibraryURL -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+<script>
+    $(document).ready(function () {
+        const temp = {
+            type: 'line',
             data: {
-                labels: {{ temp_times | safe }},
-                datasets: [
-                    {
-                        label: "Temperature",
-                        data: {{ temp_values | safe }},
-                        fill: true,
-                        borderCorlor: "rgb(92, 192, 192)",
-                        lineTension: 0.5
-                    }
-                ]
+                labels: [],
+                datasets: [{
+                    label: "Temperature",
+                    backgroundColor: 'rgba(255, 69, 0, 0.5)',
+                    borderColor: 'rgb(255, 69, 0)',
+                    data: [],
+                    fill: true,
+                    lineTension: 0.5
+                }],
             },
             options: {
-                responsive: false
-            }
-        })
-    </script>-
-
-    <script>
-        var ctx = document.getElementById("lineChartHumi").getContext("2d");
-        var lineChart = new Chart(ctx, {
-            type: "line",
-            data: {
-                labels: {{ humi_times | safe }},
-                datasets: [
-                    {
-                        label: "Humidity",
-                        data: {{ humi_values | safe }},
-                        fill: true,
-                        borderCorlor: "rgb(75, 192, 192)",
-                        lineTension: 0.5
-                    }
-                ]
-            },
-            options: {
-                responsive: false
-            }
-        })
-    </script>
-    <!--<script>
-        setInterval(function() 
-        {
-            var xhttp = new XMLHttpRequest();
-            xhttp.onload = function() 
-            {
-                if (this.readyState == 4 && this.status == 200) 
-                {
-                    document.getElementById("temp", "humi").innerHTML =
-                    this.responseText;
+                responsive: true,
+                title: {
+                    display: true,
+                    text: 'Temperature'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Time'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Value'
+                        }
+                    }]
                 }
-            };
-            xhttp.open("GET", "/", true);
-            xhttp.send();
-        }, 1000); 
-    </script>-->
+            }
+        };
+
+        const humi = {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: "Humidity",
+                    backgroundColor: 'rgba(0, 191, 255, 0.5)',
+                    borderColor: 'rgb(0, 191, 255)',
+                    data: [],
+                    fill: true,
+                    lineTension: 0.5
+                }],
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    text: 'Humidity'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Time'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Value'
+                        }
+                    }]
+                }
+            }
+        };
+
+        const tempContext = document.getElementById('tempChart').getContext('2d');
+
+        const humiContext = document.getElementById('humiChart').getContext('2d');
+
+        const tempChart = new Chart(tempContext, temp);
+
+        const humiChart = new Chart(humiContext, humi);
+
+        const source = new EventSource("/chart-data");
+
+        source.onmessage = function (event) {
+            const data = JSON.parse(event.data);
+            if (temp.data.labels.length === 20) {
+                temp.data.labels.shift();
+                temp.data.datasets[0].data.shift();
+            }
+            if (humi.data.labels.length === 20) {
+                humi.data.labels.shift();
+                humi.data.datasets[0].data.shift();
+            }
+            temp.data.labels.push(data.temp_time);
+            temp.data.datasets[0].data.push(data.temp_value);
+            humi.data.labels.push(data.humi_time);
+            humi.data.datasets[0].data.push(data.humi_value);
+            tempChart.update();
+            humiChart.update();
+        }
+    });
+</script>
 </body>
 </html>
