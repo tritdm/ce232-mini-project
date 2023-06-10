@@ -131,11 +131,11 @@
 
         source.onmessage = function (event) {
             const data = JSON.parse(event.data);
-            if (temp.data.labels.length === 20) {
+            if (temp.data.labels.length === 10) {
                 temp.data.labels.shift();
                 temp.data.datasets[0].data.shift();
             }
-            if (humi.data.labels.length === 20) {
+            if (humi.data.labels.length === 10) {
                 humi.data.labels.shift();
                 humi.data.datasets[0].data.shift();
             }
