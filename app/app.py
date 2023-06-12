@@ -1,5 +1,4 @@
-import os
-from flask import Flask, render_template, jsonify, make_response, Response, stream_with_context
+from flask import Flask, render_template, Response, stream_with_context
 from flask_mqtt import Mqtt
 import sqlite3
 import json
@@ -20,7 +19,7 @@ def get_db_connection():
 
 @app.route('/')
 def index():
-    return render_template('home.html')
+    return render_template('index.html')
     
 @app.route('/chart-data')
 def chart_data():
