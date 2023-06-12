@@ -141,7 +141,7 @@ void app_main(void)
 
     i2c_master_init();
 	ssd1306_init();
-    sensor = hdc1080_init_sensor (I2C_MASTER_NUM, HDC1080_ADDR);
+    sensor = hdc1080_init_sensor(I2C_MASTER_NUM, HDC1080_ADDR);
 
 	if (sensor)
     {
@@ -187,6 +187,8 @@ void app_main(void)
 		xTaskCreate(task_ssd1306_display_text, "display_text", 1024 * 1, (void *)oled_print, 10, NULL);
 		vTaskDelay(10000 / portTICK_PERIOD_MS);
 
+		free(temp_char);
+		free(humi_char);
 		free(oled_print);
 	}
 }

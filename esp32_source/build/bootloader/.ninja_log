@@ -106,3 +106,5 @@
 1888	2386	1686141155973532754	esp-idf/efuse/CMakeFiles/__idf_efuse.dir/src/efuse_controller/keys/without_key_purposes/three_key_blocks/esp_efuse_api_key.c.obj	d2baad6a5a67295c
 1	48	0	esp-idf/esptool_py/CMakeFiles/bootloader_check_size	a073eebb6cf7da0d
 1	48	0	/home/mike/Documents/tkhtn_kd/mini_project/esp32_source/build/bootloader/esp-idf/esptool_py/CMakeFiles/bootloader_check_size	a073eebb6cf7da0d
+2	62	0	esp-idf/esptool_py/CMakeFiles/bootloader_check_size	a073eebb6cf7da0d
+2	62	0	/home/mike/Documents/tkhtn_kd/mini_project/esp32_source/build/bootloader/esp-idf/esptool_py/CMakeFiles/bootloader_check_size	a073eebb6cf7da0d

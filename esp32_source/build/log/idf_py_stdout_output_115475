@@ -1,0 +1,139 @@
+[0/1] Re-running CMake...
+-- Building ESP-IDF components for target esp32
+-- Project sdkconfig file /home/mike/Documents/tkhtn_kd/mini_project/esp32_source/sdkconfig
+-- App "esp32_source" version: e68ff8a-dirty
+-- Adding linker script /home/mike/Documents/tkhtn_kd/mini_project/esp32_source/build/esp-idf/esp_system/ld/memory.ld
+-- Adding linker script /home/mike/esp/esp-idf/components/esp_system/ld/esp32/sections.ld.in
+-- Adding linker script /home/mike/esp/esp-idf/components/esp_rom/esp32/ld/esp32.rom.ld
+-- Adding linker script /home/mike/esp/esp-idf/components/esp_rom/esp32/ld/esp32.rom.api.ld
+-- Adding linker script /home/mike/esp/esp-idf/components/esp_rom/esp32/ld/esp32.rom.libgcc.ld
+-- Adding linker script /home/mike/esp/esp-idf/components/esp_rom/esp32/ld/esp32.rom.newlib-data.ld
+-- Adding linker script /home/mike/esp/esp-idf/components/esp_rom/esp32/ld/esp32.rom.syscalls.ld
+-- Adding linker script /home/mike/esp/esp-idf/components/esp_rom/esp32/ld/esp32.rom.newlib-funcs.ld
+-- Adding linker script /home/mike/esp/esp-idf/components/soc/esp32/ld/esp32.peripherals.ld
+-- Components: app_trace app_update bootloader bootloader_support bt cmock console cxx driver efuse esp-tls esp_adc esp_app_format esp_coex esp_common esp_eth esp_event esp_gdbstub esp_hid esp_http_client esp_http_server esp_https_ota esp_https_server esp_hw_support esp_lcd esp_local_ctrl esp_mm esp_netif esp_netif_stack esp_partition esp_phy esp_pm esp_psram esp_ringbuf esp_rom esp_system esp_timer esp_wifi espcoredump esptool_py fatfs freertos hal heap http_parser idf_test ieee802154 json log lwip main mbedtls mqtt newlib nvs_flash openthread partition_table perfmon protobuf-c protocol_examples_common protocomm pthread sdmmc soc spi_flash spiffs tcp_transport ulp unity usb vfs wear_levelling wifi_provisioning wpa_supplicant xtensa
+-- Component paths: /home/mike/esp/esp-idf/components/app_trace /home/mike/esp/esp-idf/components/app_update /home/mike/esp/esp-idf/components/bootloader /home/mike/esp/esp-idf/components/bootloader_support /home/mike/esp/esp-idf/components/bt /home/mike/esp/esp-idf/components/cmock /home/mike/esp/esp-idf/components/console /home/mike/esp/esp-idf/components/cxx /home/mike/esp/esp-idf/components/driver /home/mike/esp/esp-idf/components/efuse /home/mike/esp/esp-idf/components/esp-tls /home/mike/esp/esp-idf/components/esp_adc /home/mike/esp/esp-idf/components/esp_app_format /home/mike/esp/esp-idf/components/esp_coex /home/mike/esp/esp-idf/components/esp_common /home/mike/esp/esp-idf/components/esp_eth /home/mike/esp/esp-idf/components/esp_event /home/mike/esp/esp-idf/components/esp_gdbstub /home/mike/esp/esp-idf/components/esp_hid /home/mike/esp/esp-idf/components/esp_http_client /home/mike/esp/esp-idf/components/esp_http_server /home/mike/esp/esp-idf/components/esp_https_ota /home/mike/esp/esp-idf/components/esp_https_server /home/mike/esp/esp-idf/components/esp_hw_support /home/mike/esp/esp-idf/components/esp_lcd /home/mike/esp/esp-idf/components/esp_local_ctrl /home/mike/esp/esp-idf/components/esp_mm /home/mike/esp/esp-idf/components/esp_netif /home/mike/esp/esp-idf/components/esp_netif_stack /home/mike/esp/esp-idf/components/esp_partition /home/mike/esp/esp-idf/components/esp_phy /home/mike/esp/esp-idf/components/esp_pm /home/mike/esp/esp-idf/components/esp_psram /home/mike/esp/esp-idf/components/esp_ringbuf /home/mike/esp/esp-idf/components/esp_rom /home/mike/esp/esp-idf/components/esp_system /home/mike/esp/esp-idf/components/esp_timer /home/mike/esp/esp-idf/components/esp_wifi /home/mike/esp/esp-idf/components/espcoredump /home/mike/esp/esp-idf/components/esptool_py /home/mike/esp/esp-idf/components/fatfs /home/mike/esp/esp-idf/components/freertos /home/mike/esp/esp-idf/components/hal /home/mike/esp/esp-idf/components/heap /home/mike/esp/esp-idf/components/http_parser /home/mike/esp/esp-idf/components/idf_test /home/mike/esp/esp-idf/components/ieee802154 /home/mike/esp/esp-idf/components/json /home/mike/esp/esp-idf/components/log /home/mike/esp/esp-idf/components/lwip /home/mike/Documents/tkhtn_kd/mini_project/esp32_source/main /home/mike/esp/esp-idf/components/mbedtls /home/mike/esp/esp-idf/components/mqtt /home/mike/esp/esp-idf/components/newlib /home/mike/esp/esp-idf/components/nvs_flash /home/mike/esp/esp-idf/components/openthread /home/mike/esp/esp-idf/components/partition_table /home/mike/esp/esp-idf/components/perfmon /home/mike/esp/esp-idf/components/protobuf-c /home/mike/esp/esp-idf/examples/common_components/protocol_examples_common /home/mike/esp/esp-idf/components/protocomm /home/mike/esp/esp-idf/components/pthread /home/mike/esp/esp-idf/components/sdmmc /home/mike/esp/esp-idf/components/soc /home/mike/esp/esp-idf/components/spi_flash /home/mike/esp/esp-idf/components/spiffs /home/mike/esp/esp-idf/components/tcp_transport /home/mike/esp/esp-idf/components/ulp /home/mike/esp/esp-idf/components/unity /home/mike/esp/esp-idf/components/usb /home/mike/esp/esp-idf/components/vfs /home/mike/esp/esp-idf/components/wear_levelling /home/mike/esp/esp-idf/components/wifi_provisioning /home/mike/esp/esp-idf/components/wpa_supplicant /home/mike/esp/esp-idf/components/xtensa
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/mike/Documents/tkhtn_kd/mini_project/esp32_source/build
+[1/12] Building C object esp-idf/esp_app_format/CMakeFiles/__idf_esp_app_format.dir/esp_app_desc.c.obj
+[2/12] Performing build step for 'bootloader'
+[1/1] cd /home/mike/Documents/tkhtn_kd/mini_project/esp32_source/build/bootloader/esp-idf/esptool_py && /home/mike/.espressif/python_env/idf5.1_py3.8_env/bin/python /home/mike/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 /home/mike/Documents/tkhtn_kd/mini_project/esp32_source/build/bootloader/bootloader.bin
+Bootloader binary size 0x6740 bytes. 0x8c0 bytes (8%) free.
+[3/12] No install step for 'bootloader'
+[4/12] Linking C static library esp-idf/esp_app_format/libesp_app_format.a
+[5/12] Completed 'bootloader'
+[6/12] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/src/main.c.obj
+/home/mike/Documents/tkhtn_kd/mini_project/esp32_source/main/src/main.c: In function 'mqtt_event_handler':
+/home/mike/Documents/tkhtn_kd/mini_project/esp32_source/main/src/main.c:71:9: warning: variable 'msg_id' set but not used [-Wunused-but-set-variable]
+   71 |     int msg_id;
+      |         ^~~~~~
+/home/mike/Documents/tkhtn_kd/mini_project/esp32_source/main/src/main.c: In function 'app_main':
+/home/mike/Documents/tkhtn_kd/mini_project/esp32_source/main/src/main.c:144:12: warning: assignment to 'hdc1080_registers_t *' from incompatible pointer type 'hdc1080_sensor_t *' [-Wincompatible-pointer-types]
+  144 |     sensor = hdc1080_init_sensor(I2C_MASTER_NUM, HDC1080_ADDR);
+      |            ^
+/home/mike/Documents/tkhtn_kd/mini_project/esp32_source/main/src/main.c:148:63: warning: passing argument 1 of 'hdc1080_get_registers' from incompatible pointer type [-Wincompatible-pointer-types]
+  148 |         hdc1080_registers_t registers = hdc1080_get_registers(sensor);
+      |                                                               ^~~~~~
+      |                                                               |
+      |                                                               hdc1080_registers_t *
+In file included from /home/mike/Documents/tkhtn_kd/mini_project/esp32_source/main/src/main.c:35:
+/home/mike/Documents/tkhtn_kd/mini_project/esp32_source/main/inc/hdc1080.h:87:61: note: expected 'hdc1080_sensor_t *' but argument is of type 'hdc1080_registers_t *'
+   87 | hdc1080_registers_t hdc1080_get_registers(hdc1080_sensor_t* sensor);
+      |                                           ~~~~~~~~~~~~~~~~~~^~~~~~
+/home/mike/Documents/tkhtn_kd/mini_project/esp32_source/main/src/main.c:152:31: warning: passing argument 1 of 'hdc1080_set_registers' from incompatible pointer type [-Wincompatible-pointer-types]
+  152 |         hdc1080_set_registers(sensor, registers);
+      |                               ^~~~~~
+      |                               |
+      |                               hdc1080_registers_t *
+/home/mike/Documents/tkhtn_kd/mini_project/esp32_source/main/inc/hdc1080.h:88:46: note: expected 'hdc1080_sensor_t *' but argument is of type 'hdc1080_registers_t *'
+   88 | void hdc1080_set_registers(hdc1080_sensor_t* sensor, hdc1080_registers_t registers);
+      |                            ~~~~~~~~~~~~~~~~~~^~~~~~
+/home/mike/Documents/tkhtn_kd/mini_project/esp32_source/main/src/main.c:170:30: warning: passing argument 1 of 'hdc1080_read' from incompatible pointer type [-Wincompatible-pointer-types]
+  170 |                 hdc1080_read(sensor, &temp, &humi);
+      |                              ^~~~~~
+      |                              |
+      |                              hdc1080_registers_t *
+/home/mike/Documents/tkhtn_kd/mini_project/esp32_source/main/inc/hdc1080.h:98:37: note: expected 'hdc1080_sensor_t *' but argument is of type 'hdc1080_registers_t *'
+   98 | bool hdc1080_read(hdc1080_sensor_t* sensor, float* temperature, float* humidity);
+      |                   ~~~~~~~~~~~~~~~~~~^~~~~~
+[7/12] Linking C static library esp-idf/main/libmain.a
+[8/12] Generating ld/sections.ld
+[9/12] Linking CXX executable esp32_source.elf
+[10/12] Generating binary image from built executable
+esptool.py v4.5.1
+Creating esp32 image...
+Merged 25 ELF sections
+Successfully created esp32 image.
+Generated /home/mike/Documents/tkhtn_kd/mini_project/esp32_source/build/esp32_source.bin
+[11/12] cd /home/mike/Documents/tkhtn_kd/mini_project/esp32_source/build/esp-idf/esptool_py && /home/mike/.espressif/python_env/idf5.1_py3.8_env/bin/python /home/mike/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /home/mike/Documents/tkhtn_kd/mini_project/esp32_source/build/partition_table/partition-table.bin /home/mike/Documents/tkhtn_kd/mini_project/esp32_source/build/esp32_source.bin
+esp32_source.bin binary size 0xdf160 bytes. Smallest app partition is 0x100000 bytes. 0x20ea0 bytes (13%) free.
+[11/12] cd /home/mike/esp/esp-idf/components/esptool_py && /home/mike/.espressif/python_env/idf5.1_py3.8_env/lib/python3.8/site-packages/cmake/data/bin/cmake -D IDF_PATH=/home/mike/esp/esp-idf -D "SERIAL_TOOL=/home/mike/.espressif/python_env/idf5.1_py3.8_env/bin/python;;/home/mike/esp/esp-idf/components/esptool_py/esptool/esptool.py;--chip;esp32" -D "SERIAL_TOOL_ARGS=--before=default_reset;--after=hard_reset;write_flash;@flash_args" -D WORKING_DIRECTORY=/home/mike/Documents/tkhtn_kd/mini_project/esp32_source/build -P /home/mike/esp/esp-idf/components/esptool_py/run_serial_tool.cmake
+esptool esp32 -p /dev/ttyUSB0 -b 460800 --before=default_reset --after=hard_reset write_flash --flash_mode dio --flash_freq 40m --flash_size 2MB 0x1000 bootloader/bootloader.bin 0x10000 esp32_source.bin 0x8000 partition_table/partition-table.bin
+esptool.py v4.5.1
+Serial port /dev/ttyUSB0
+Connecting....
+Chip is ESP32-D0WDQ6 (revision v1.0)
+Features: WiFi, BT, Dual Core, 240MHz, VRef calibration in efuse, Coding Scheme None
+Crystal is 40MHz
+MAC: c8:f0:9e:a6:25:d0
+Uploading stub...
+Running stub...
+Stub running...
+Changing baud rate to 460800
+Changed.
+Configuring flash size...
+Flash will be erased from 0x00001000 to 0x00007fff...
+Flash will be erased from 0x00010000 to 0x000effff...
+Flash will be erased from 0x00008000 to 0x00008fff...
+Compressed 26432 bytes to 16576...
+Writing at 0x00001000... (50 %)
+Writing at 0x0000763e... (100 %)
+Wrote 26432 bytes (16576 compressed) at 0x00001000 in 0.8 seconds (effective 253.8 kbit/s)...
+Hash of data verified.
+Compressed 913760 bytes to 580416...
+Writing at 0x00010000... (2 %)
+Writing at 0x0001cc24... (5 %)
+Writing at 0x000243db... (8 %)
+Writing at 0x00029de1... (11 %)
+Writing at 0x00035baf... (13 %)
+Writing at 0x0003f40f... (16 %)
+Writing at 0x00044bb0... (19 %)
+Writing at 0x0004a490... (22 %)
+Writing at 0x00050396... (25 %)
+Writing at 0x00055e8a... (27 %)
+Writing at 0x0005b74c... (30 %)
+Writing at 0x0006122f... (33 %)
+Writing at 0x000677aa... (36 %)
+Writing at 0x0006d265... (38 %)
+Writing at 0x00072b72... (41 %)
+Writing at 0x00078007... (44 %)
+Writing at 0x0007d405... (47 %)
+Writing at 0x00082a7b... (50 %)
+Writing at 0x00087de2... (52 %)
+Writing at 0x0008d567... (55 %)
+Writing at 0x00092d74... (58 %)
+Writing at 0x00098d09... (61 %)
+Writing at 0x0009e41b... (63 %)
+Writing at 0x000a38f4... (66 %)
+Writing at 0x000a915e... (69 %)
+Writing at 0x000aeb70... (72 %)
+Writing at 0x000b41e8... (75 %)
+Writing at 0x000b9bc9... (77 %)
+Writing at 0x000bf658... (80 %)
+Writing at 0x000c4dde... (83 %)
+Writing at 0x000cdaf0... (86 %)
+Writing at 0x000d5f8c... (88 %)
+Writing at 0x000dbf28... (91 %)
+Writing at 0x000e1abb... (94 %)
+Writing at 0x000e777a... (97 %)
+Writing at 0x000eca1e... (100 %)
+Wrote 913760 bytes (580416 compressed) at 0x00010000 in 13.3 seconds (effective 551.4 kbit/s)...
+Hash of data verified.
+Compressed 3072 bytes to 103...
+Writing at 0x00008000... (100 %)
+Wrote 3072 bytes (103 compressed) at 0x00008000 in 0.1 seconds (effective 356.7 kbit/s)...
+Hash of data verified.
+
+Leaving...
+Hard resetting via RTS pin...
