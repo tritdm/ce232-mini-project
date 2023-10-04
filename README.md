@@ -1,4 +1,5 @@
-# The wireless embedded system design mini project
+# Easy IoT application with ESP32-Espressif
+## This is my Wireless Embedded System Design Mini Project (CE232 in UIT).
 ## Design an IoT system have the below requirements
 ### Model of project
 ![alt](/readme_folder/model.png)
@@ -66,3 +67,5 @@ $ ngrok http 5000
 * The result
 
 ![ngrok](/readme_folder/ngrok.png)
+
+## [Demo](https://youtu.be/ckpprC5UXp0)
